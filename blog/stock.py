@@ -48,13 +48,13 @@ def read_prices(code, year=None, show_date=False, candle=False): #一回スタ�
 
     real_start, real_end = None, None
     while real_start == None: #実際にある開始と終了が見つかるまで探す
-        start_index = f"{start.year}-" + "%02d"%start.month + "-%02d"%start.day
+        start_index = "{}-".format(start.year) + "%02d"%start.month + "-%02d"%start.day
         if start_index in data.index:
             real_start = start_index
         else:
             start = start + dt.timedelta(days=1)
     while real_end == None:
-        end_index = f"{end.year}-" + "%02d"%end.month + "-%02d"%end.day
+        end_index = "{}-".format(end.year) + "%02d"%end.month + "-%02d"%end.day
         if end_index in data.index:
             real_end = end_index
         else:
@@ -194,7 +194,7 @@ def scan_class_variables(df, column_list, about):
 
 def convert_number_into_class(codes, classification_column, source_df, border_list):
     border_list.sort(reverse=True)
-    class_list =[f"{border_list[0]}以上"]+[f"{border_list[i+1]}以上{border_list[i]}未満" for i in range(len(border_list)-1)]+[f"{border_list[-1]}未満"]
+    class_list =["{}以上".format(border_list[0])]+["{}以上{}未満".format(border_list[i+1], border_list[i]) for i in range(len(border_list)-1)]+["{}未満".format(border_list[-1])]
     for code in codes:
         data = source_df.loc[code,classification_column]
         if np.isnan(data):
