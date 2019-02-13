@@ -1,9 +1,27 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h3>コードを入力</h3>
-    <form method="post" action="">{% csrf_token %}
-        <input type="text" name="code" size="1">
-        <input type="submit" value="入力">
+    <form method="post" class="select">{% csrf_token %}
+      <p class="code-select">コードで検索<br>
+        <input type="text" name="code" size="5">
+      </p>
+      <p class="code-select">市場ごと検索<br>
+        <select name="mk_idx">
+          <option value="no_market">市場選択無し</option>
+          <option value="市場第一部（内国株）">東証一部</option>
+          <option value="市場第二部（内国株）">東証二部</option>
+          <option value="JASDAQ(スタンダード・内国株）">JASDAQスタンダード</option>
+          <option value="JASDAQ(グロース・内国株）">JASDAQグロース</option>
+          <option value="マザーズ（内国株）">マザーズ</option>
+        </select>
+      </p>
+      <p>年<br>
+        <input type="text" name="year" size="4">
+      </p>
+      <p>指標選択<br>
+        <input type="checkbox" name="col0" value="騰落率（％）"> 騰落率
+        <input type="checkbox" name="col1" value="最大変動率（％）"> 最大変動率
+      </p>
+      <input type="submit" value="入力">
     </form>
 {% endblock %}
