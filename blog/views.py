@@ -49,7 +49,7 @@ def analysis(request):
         if mk_idx != "no_market":
             codes = stock.get_market_codes(mk_idx)
         year = request.POST.get("year")
-        col_list = [request.POST.get(f"col{i}") for i in range(2) if request.POST.get(f"col{i}")]
+        col_list = [request.POST.get("col{}".format(i)) for i in range(2) if request.POST.get("col{}".format(i))]
         df = stock.get_multiple_data(codes, col_list, year)
         table = df.to_html()
         return HttpResponse(table)
