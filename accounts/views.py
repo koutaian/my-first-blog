@@ -7,4 +7,4 @@ def index(request):
     user.save()
     c = Class.objects.get(class_name="世界史")
     user.classes.add(c)"""
-    return render(request, "registration/index.html")
+    return render(request, "registration/select.html")
